@@ -1,0 +1,31 @@
+-- God Mode Script for Executor (Delita)
+local lp = game.Players.LocalPlayer
+
+local function godmode()
+    local char = lp.Character or lp.CharacterAdded:Wait()
+    local hum = char:WaitForChild("Humanoid")
+
+    -- Always keep health at max
+    hum.Health = hum.MaxHealth
+    hum:GetPropertyChangedSignal("Health"):Connect(function()
+        if hum.Health < hum.MaxHealth then
+            hum.Health = hum.MaxHealth
+        end
+    end)
+
+    -- Disable death state
+    hum:SetStateEnabled(Enum.HumanoidStateType.Dead, false)
+
+    -- Restore health if touched by tools or parts
+    char.DescendantAdded:Connect(function(desc)
+        if desc:IsA("Tool") or desc:IsA("BasePart") then
+            desc.Touched:Connect(function()
+                hum.Health = hum.MaxHealth
+            end)
+        end
+    end)
+
+    print("God Mode Enabled")
+end
+
+godmode()
