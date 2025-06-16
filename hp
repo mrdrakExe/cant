@@ -1,4 +1,4 @@
--- God Mode Script for Executor (Delita)
+
 local lp = game.Players.LocalPlayer
 
 local function godmode()
