@@ -1,4 +1,3 @@
-
 local lp = game.Players.LocalPlayer
 
 local function godmode()
